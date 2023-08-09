@@ -8,7 +8,6 @@ plugins {
 
 val mainClassName = "Main"
 
-
 dependencies {
     implementation(project(":box2d:base"))
     implementation("com.github.xpenatan.jParser:jParser-core:${LibExt.jParserVersion}")
@@ -84,23 +83,3 @@ tasks.register<Download>("download_source") {
         delete(zippedPath)
     }
 }
-
-//tasks.register("download_and_unzip") {
-//    group = "box2d"
-//    description = "Download box2d source and unzip"
-//
-//    eachFile { fcd ->
-//        include "ocornut-imgui*/"
-//        def paths = fcd.relativePath.segments.drop(1)
-//        fcd.relativePath = new RelativePath(true, paths)  // (2)
-//        def fullString = paths.toString()
-//        if (paths.length > 1 || !(fullString.contains(".h") || fullString.contains(".cpp")))
-//            fcd.exclude()
-//    }
-//
-//    includeEmptyDirs = false
-//
-//    into {
-//        projectDir.toString() + "/build/imgui/"
-//    }
-//}
