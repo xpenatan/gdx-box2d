@@ -27,7 +27,7 @@ tasks.register<JavaExec>("generate_project_classes") {
 val zippedPath = "$buildDir/box2d-source.zip"
 val sourcePath = "$buildDir/box2d-source"
 val unzippedFolder = "$sourcePath/box2d-2.4.1/"
-val sourceDestination = "$buildDir/box2d/source/"
+val sourceDestination = "$buildDir/box2d/box2d/"
 
 cmake {
     generator.set("MinGW Makefiles")
@@ -72,12 +72,8 @@ tasks.register<Download>("download_source") {
     doLast {
         unzipTo(File(sourcePath), dest)
         copy{
-            from("$unzippedFolder/src/")
-            into("$sourceDestination/src")
-        }
-        copy{
-            from("$unzippedFolder/include/")
-            into("$sourceDestination/include")
+            from(unzippedFolder)
+            into(sourceDestination)
         }
         delete(sourcePath)
         delete(zippedPath)

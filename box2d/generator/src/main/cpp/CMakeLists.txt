@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 
-project("box2d" VERSION 2.4.1)
-SUBDIRS(source/src)
-
 FIND_PACKAGE(Python3)
 set(PYTHON ${Python3_EXECUTABLE} CACHE STRING "Python path")
 set(EMSCRIPTEN_ROOT $ENV{EMSDK}/upstream/emscripten CACHE STRING "Emscripten path")
@@ -11,18 +8,16 @@ set(CMAKE_TOOLCHAIN_FILE ${EMSCRIPTEN_ROOT}/cmake/Modules/Platform/Emscripten.cm
 set(WEBIDL_BINDER_SCRIPT ${EMSCRIPTEN_ROOT}/tools/webidl_binder.py)
 set(BOX2D_HEADER_FILE ${CMAKE_CURRENT_SOURCE_DIR}/box2d.h)
 set(BOX2D_IDL_FILE ${CMAKE_CURRENT_SOURCE_DIR}/box2d.idl)
-set(BOX2D_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/source/src)
+set(BOX2D_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/box2d/src)
+set(BOX2D_HRD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/box2d/include)
 
 set(BOX2D_TARGETS box2d)
 foreach(_TARGET ${BOX2D_TARGETS})
   list(APPEND BOX2D_LIBS $<TARGET_FILE:${_TARGET}>)
 endforeach()
 
-# Disable box2D graphical benchmarks
-set(USE_GRAPHICAL_BENCHMARK OFF)
-
-# Disable box2D GLUT
-set(USE_GLUT OFF)
+set(BOX2D_BUILD_UNIT_TESTS OFF)
+set(BOX2D_BUILD_TESTBED OFF)
 
 # Build Release by default
 set(CMAKE_BUILD_TYPE Release CACHE STRING "Build Type")
@@ -66,12 +61,15 @@ set(EMCC_WASM_ARGS ${EMCC_ARGS}
 
 set(EMCC_GLUE_ARGS
   -c
+  -I${BOX2D_HRD_DIR}
   -I${BOX2D_SRC_DIR}
   -include ../../custom_glue.cpp
   -include ${BOX2D_HEADER_FILE}
 )
 
 #######################################
+project("box2d")
+add_subdirectory(box2d EXCLUDE_FROM_ALL)
 
 #######################################
 add_custom_command(
