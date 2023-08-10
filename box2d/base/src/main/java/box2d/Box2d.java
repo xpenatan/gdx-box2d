@@ -7,7 +7,11 @@ import com.github.xpenatan.jparser.loader.JParserLibraryLoader;
  */
 /*[-IDL_SKIP]*/
 public class Box2d {
+//    b2_collision.h
 
+    /*[-C++;-NATIVE]
+       #include "box2d/box2d.h"
+    */
 
     /*[-teaVM;-ADD]
         @org.teavm.jso.JSFunctor

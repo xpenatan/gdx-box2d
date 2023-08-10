@@ -26,7 +26,7 @@ public class Main {
         String libName = "box2d";
         String idlPath = "src\\main\\cpp\\box2d.idl";
         String baseJavaDir = new File(".").getAbsolutePath() + "./base/src/main/java";
-        String cppSourceDir = new File("./build/box2d/source/").getCanonicalPath();
+        String cppSourceDir = new File("./build/box2d/box2d/").getCanonicalPath();
 
         IDLReader idlReader = IDLReader.readIDL(idlPath, cppSourceDir);
 
@@ -68,9 +68,12 @@ public class Main {
         config.libName = libName;
         config.buildPath = libBuildPath;
         config.libsDir = libsDir;
-        config.headerDir.add("src/");
+
         config.headerDir.add("src/src/");
         config.headerDir.add("src/include/");
+        config.cppIncludes.add("src/src/**/*.cpp");
+        config.cppIncludes.add("src/JNIGlue.cpp");
+
         CPPBuildHelper.build(config);
     }
 

@@ -1,4 +1,4 @@
-val moduleName = "gdx-box2d-teavm"
+val moduleName = "teavm"
 
 dependencies {
     implementation("com.badlogicgames.gdx:gdx:${LibExt.gdxVersion}")
@@ -9,7 +9,8 @@ dependencies {
 tasks.named("clean") {
     doFirst {
         val srcPath = "$projectDir/src/main/java"
-        project.delete(files(srcPath))
+        val jsPath = "$projectDir/src/main/resources/box2d.wasm.js"
+        project.delete(files(srcPath, jsPath))
     }
 }
 

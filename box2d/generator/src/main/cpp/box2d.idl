@@ -19,8 +19,8 @@ interface b2Draw {
 interface b2World {
     void b2World([Const, Ref] b2Vec2 gravity);
     void SetDestructionListener(b2DestructionListener listener);
-    void SetContactFilter(JSContactFilter filter);
-    void SetContactListener(JSContactListener listener);
+    void SetContactFilter(b2ContactFilter filter);
+    void SetContactListener(b2ContactListener listener);
     void SetDebugDraw(b2Draw debugDraw);
     b2Body CreateBody([Const] b2BodyDef def);
     void DestroyBody(b2Body body);
@@ -80,7 +80,7 @@ interface b2Vec2 {
 
 interface b2BodyDef {
     void b2BodyDef();
-    attribute b2BodyType type;
+//    attribute b2BodyType type;
     [Value]attribute b2Vec2 position;
     attribute float angle;
     [Value]attribute b2Vec2 linearVelocity;
@@ -132,8 +132,8 @@ interface b2Body {
     void SetAngularDamping(float angularDamping);
     float GetGravityScale();
     void SetGravityScale(float scale);
-    void SetType(b2BodyType type);
-    b2BodyType GetType();
+//    void SetType(b2BodyType type);
+//    b2BodyType GetType();
     void SetBullet(boolean flag);
     boolean IsBullet();
     void SetSleepingAllowed(boolean flag);
@@ -190,7 +190,7 @@ enum b2ShapeType {
 };
 
 interface b2Shape {
-    b2ShapeType GetType();
+//    b2ShapeType GetType();
     long GetChildCount();
     boolean TestPoint([Ref] b2Transform xf, [Ref] b2Vec2 p);
     boolean RayCast(b2RayCastOutput output, [Ref] b2RayCastInput input,
@@ -198,7 +198,7 @@ interface b2Shape {
     void ComputeAABB(b2AABB aabb, [Ref] b2Transform xf, long childIndex);
     void ComputeMass(b2MassData massData, float density);
 
-    attribute b2ShapeType m_type;
+//    attribute b2ShapeType m_type;
     attribute float m_radius;
 };
 
@@ -277,7 +277,7 @@ interface b2Filter {
 };
 
 interface b2Fixture {
-    b2ShapeType GetType();
+//    b2ShapeType GetType();
     b2Shape GetShape();
     void SetSensor(boolean sensor);
     boolean IsSensor();
@@ -359,7 +359,7 @@ enum b2JointType {
 
 interface b2JointDef {
     void b2JointDef();
-    attribute b2JointType type;
+//    attribute b2JointType type;
     attribute b2Body bodyA;
     attribute b2Body bodyB;
     attribute boolean collideConnected;
@@ -367,7 +367,7 @@ interface b2JointDef {
 
 [NoDelete]
 interface b2Joint {
-    b2JointType GetType();
+//    b2JointType GetType();
     b2Body GetBodyA();
     b2Body GetBodyB();
     [Value] b2Vec2 GetAnchorA();
@@ -448,7 +448,7 @@ interface b2Manifold {
 //    // [Value] attribute b2ManifoldPoint[] points;
     [Value] attribute b2Vec2 localNormal;
     [Value] attribute b2Vec2 localPoint;
-    attribute b2ManifoldType type;
+//    attribute b2ManifoldType type;
     attribute long pointCount;
 };
 
@@ -456,8 +456,8 @@ interface b2WorldManifold {
     void b2WorldManifold();
     void Initialize(b2Manifold manifold, [Ref] b2Transform xfA, float radiusA, [Ref] b2Transform xfB, float radiusB);
     [Value] attribute b2Vec2 normal;
-    [Value] attribute b2Vec2[] points;
-    attribute float[] separations;
+//    [Value] attribute b2Vec2[] points;
+//    attribute float[] separations;
 };
 
 interface b2QueryCallback {
