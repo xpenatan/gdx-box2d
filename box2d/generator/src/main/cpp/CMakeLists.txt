@@ -12,7 +12,6 @@ set(WEBIDL_BINDER_SCRIPT ${EMSCRIPTEN_ROOT}/tools/webidl_binder.py)
 set(BOX2D_HEADER_FILE ${CMAKE_CURRENT_SOURCE_DIR}/box2d.h)
 set(BOX2D_IDL_FILE ${CMAKE_CURRENT_SOURCE_DIR}/box2d.idl)
 set(BOX2D_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/source/src)
-set(BOX2D_HDR_DIR ${CMAKE_CURRENT_SOURCE_DIR}/source/include)
 
 set(BOX2D_TARGETS box2d)
 foreach(_TARGET ${BOX2D_TARGETS})
@@ -68,7 +67,6 @@ set(EMCC_WASM_ARGS ${EMCC_ARGS}
 set(EMCC_GLUE_ARGS
   -c
   -I${BOX2D_SRC_DIR}
-  -I${BOX2D_HDR_DIR}
   -include ../../custom_glue.cpp
   -include ${BOX2D_HEADER_FILE}
 )
